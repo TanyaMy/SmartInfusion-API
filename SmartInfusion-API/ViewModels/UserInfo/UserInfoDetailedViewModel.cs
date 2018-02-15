@@ -25,6 +25,8 @@ namespace SmartInfusion.API.ViewModels.UserInfo
 
         public string PhoneNumber { get; set; }
 
+        public double Weight { get; set; }
+
         public UserInfoDetailedViewModel(global::Common.Entities.UserInfo userInfo)
         {
             this.Id = userInfo.UserInfoId;
@@ -40,6 +42,7 @@ namespace SmartInfusion.API.ViewModels.UserInfo
             this.Country = userInfo.Country;
             this.City = userInfo.City;
             this.PhoneNumber = userInfo.PhoneNumber;
+            this.Weight = userInfo.Weight;
         }
     }
 }

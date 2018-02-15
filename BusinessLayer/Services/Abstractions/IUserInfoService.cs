@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Models.ViewModels;
-using Common.Entities;
+﻿using Common.Entities;
 
 namespace BusinessLayer.Services.Abstractions
 {
@@ -9,7 +8,7 @@ namespace BusinessLayer.Services.Abstractions
 
         UserInfo GetUserInfoByUserId(string id);
 
-        UserInfo RegisterPatient(PatientOrganRequestViewModel model);
+        //UserInfo RegisterPatient(PatientMedicineViewModel model);
 
         void Update(UserInfo patient);
     }

@@ -29,14 +29,10 @@ namespace SmartInfusion.API.Infrastructure
             }).AddEntityFrameworkStores<AppDbContext>();
 
             // Data Layer
-            services.AddTransient<IClinicsRepository, ClinicsRepository>();
-            services.AddTransient<IPatientRequestsRepository, PatientRequestsRepository>();
             services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 
 
             // Business Layer
-            services.AddTransient<IClinicsService, ClinicsService>();
-            services.AddTransient<IPatientRequestsService, PatientRequestsService>();
             services.AddTransient<IUserInfoService, UserInfoService>();
             
         }

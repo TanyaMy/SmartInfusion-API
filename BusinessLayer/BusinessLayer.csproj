@@ -37,4 +37,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\ViewModels\Patient\" />
+  </ItemGroup>
+
 </Project>

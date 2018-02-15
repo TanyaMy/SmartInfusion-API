@@ -47,66 +47,9 @@ namespace DataLayer.DbContext
 
         public async Task InitializeAsync()
         {
-            await FillClinicsAsync();
             await FillRolesAsync();
             await FillRolesClaimsAsync();
             await FillUsersAsync();
-        }
-
-        private async Task FillClinicsAsync()
-        {
-            if (!_dbContext.Clinics.Any())
-            {
-                var clinics = new List<Clinic>
-                {
-                    new Clinic()
-                    {
-                        Altitude = "10.20202020",
-                        Longitude = "11.2328388",
-                        Name = "Test Clinic 1",
-                        AddressLine1 = "Some test address 1",
-                        City = "Kharkov",
-                        ContactEmail = "suppy2370@gmail.com",
-                        ContactPhone = "+380993122354",
-                        Country = "Ukraine"
-                    },
-                    new Clinic()
-                    {
-                        Altitude = "12.20202020",
-                        Longitude = "13.2328388",
-                        Name = "Test Clinic 2",
-                        AddressLine1 = "Some test address 2",
-                        City = "Kharkov",
-                        ContactEmail = "suppy2370@gmail.com",
-                        ContactPhone = "+380993122354",
-                        Country = "Ukraine"
-                    },
-                    new Clinic()
-                    {
-                        Altitude = "14.20202020",
-                        Longitude = "15.2328388",
-                        Name = "Test Clinic 3",
-                        AddressLine1 = "Some test address 3",
-                        City = "Kharkov",
-                        ContactEmail = "suppy2370@gmail.com",
-                        ContactPhone = "+380993122354",
-                        Country = "Ukraine"
-                    },
-                    new Clinic()
-                    {
-                        Altitude = "16.20202020",
-                        Longitude = "17.2328388",
-                        Name = "Test Clinic 4",
-                        AddressLine1 = "Some test address 4",
-                        City = "Kharkov",
-                        ContactEmail = "suppy2370@gmail.com",
-                        ContactPhone = "+380993122354",
-                        Country = "Ukraine"
-                    },
-                };
-                await _dbContext.Clinics.AddRangeAsync(clinics);
-                await _dbContext.SaveChangesAsync();
-            }
         }
 
         private async Task FillRolesAsync()
@@ -165,7 +108,7 @@ namespace DataLayer.DbContext
                 var patientRole = await _roleManager.FindByNameAsync(RolesConstants.Patient);
                 await _roleManager.AddClaimAsync(patientRole, viewOrganRequest);
                 await _roleManager.AddClaimAsync(patientRole, viewOrganTransportData);
-                
+
                 var medEmployeeRole = await _roleManager.FindByNameAsync(RolesConstants.MedicalEmployee);
                 await _roleManager.AddClaimAsync(medEmployeeRole, viewDonorRequestList);
                 await _roleManager.AddClaimAsync(medEmployeeRole, viewDonorRequest);
@@ -200,7 +143,6 @@ namespace DataLayer.DbContext
 
             string adminEmail = "admin1@test.com";
             string patientEmail = "patient1@test.com";
-            string donorEmail = "donor1@test.com";
             string medEmployeeEmail = "medEmployee1@test.com";
 
             UserInfo adminUserInfo = new UserInfo
@@ -250,7 +192,7 @@ namespace DataLayer.DbContext
             res = await _userManager.CreateAsync(new AppUser { UserName = medEmployeeEmail, Email = medEmployeeEmail, EmailConfirmed = true, UserInfo = medEmployeeUserInfo }, password);
             res = await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(medEmployeeEmail), RolesConstants.MedicalEmployee);
         }
-        
+
         public void Dispose()
         {
             this._dbContext?.Dispose();

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Common.Models
+﻿namespace Common.Models
 {
-    public class EditPatientRequestModel
+    public class EditPatientDiseaseHistoryModel
     {
         public int PatientRequestId { get; set; }
 

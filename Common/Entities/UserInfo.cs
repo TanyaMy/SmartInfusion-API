@@ -26,6 +26,8 @@ namespace Common.Entities
 
         public string PhoneNumber { get; set; }
 
+        public double Weight { get; set; }
+
         public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
     }

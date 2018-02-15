@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Common.Constants;
 using Common.Entities;
 using Common.Entities.Identity;
-using Common.Entities.OrganRequests;
 
 namespace DataLayer.DbContext
 {
@@ -19,8 +17,11 @@ namespace DataLayer.DbContext
 
         public DbSet<UserInfo> UserInfos { get; set; }
 
-        public DbSet<PatientRequest> PatientRequests { get; set; }
-        public DbSet<Clinic> Clinics { get; set; }
+        public DbSet<DiseaseHistory> DiseaseHistories { get; set; }
+
+        public DbSet<Treatment> Treatments { get; set; }
+
+        public DbSet<Medicine> Medicines { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,10 +40,17 @@ namespace DataLayer.DbContext
                 .WithOne(i => i.AppUser)
                 .HasForeignKey<UserInfo>(b => b.AppUserId);
 
-            modelBuilder.Entity<PatientRequest>()
-                .HasOne(ot => ot.PatientInfo)
-                .WithMany()
-                .HasForeignKey(ot => ot.PatientInfoId);            
+            modelBuilder.Entity<DiseaseHistory>()
+              .HasOne(p => p.PatientInfo)
+              .WithMany()
+              .HasForeignKey(ot => ot.PatientInfoId);
+
+            modelBuilder.Entity<Treatment>()
+              .HasOne(p => p.Medicine)
+              .WithMany()
+              .HasForeignKey(ot => ot.MedicineId);
+
+            modelBuilder.Entity<Medicine>();
         }
 
         private void RemoveCascadeDeletingGlobally(ModelBuilder modelBuilder)
