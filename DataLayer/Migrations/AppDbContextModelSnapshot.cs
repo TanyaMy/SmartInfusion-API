@@ -123,6 +123,32 @@ namespace DataLayer.Migrations
                     b.ToTable("Medicines");
                 });
 
+            modelBuilder.Entity("Common.Entities.Metrics", b =>
+                {
+                    b.Property<int>("MetricsId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<int>("DiseaseHistoryId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("Updated");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("MetricsId");
+
+                    b.HasIndex("DiseaseHistoryId");
+
+                    b.ToTable("Metrics");
+                });
+
             modelBuilder.Entity("Common.Entities.Treatment", b =>
                 {
                     b.Property<int>("TreatmentId")
@@ -318,6 +344,14 @@ namespace DataLayer.Migrations
                     b.HasOne("Common.Entities.UserInfo", "PatientInfo")
                         .WithMany()
                         .HasForeignKey("PatientInfoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Common.Entities.Metrics", b =>
+                {
+                    b.HasOne("Common.Entities.DiseaseHistory", "DiseaseHistory")
+                        .WithMany("Metrics")
+                        .HasForeignKey("DiseaseHistoryId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

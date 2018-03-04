@@ -235,6 +235,31 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Metrics",
+                columns: table => new
+                {
+                    MetricsId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DiseaseHistoryId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Metrics", x => x.MetricsId);
+                    table.ForeignKey(
+                        name: "FK_Metrics_DiseaseHistories_DiseaseHistoryId",
+                        column: x => x.DiseaseHistoryId,
+                        principalTable: "DiseaseHistories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Treatments",
                 columns: table => new
                 {
@@ -244,7 +269,6 @@ namespace DataLayer.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Diagnosis = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DiseaseHistoryId = table.Column<int>(type: "int", nullable: false),
-                    DiseaseHistoryId1 = table.Column<int>(type: "int", nullable: true),
                     Dosage = table.Column<double>(type: "float", nullable: false),
                     MedicineId = table.Column<int>(type: "int", nullable: false),
                     MedicineWeight = table.Column<double>(type: "float", nullable: false),
@@ -258,12 +282,6 @@ namespace DataLayer.Migrations
                     table.ForeignKey(
                         name: "FK_Treatments_DiseaseHistories_DiseaseHistoryId",
                         column: x => x.DiseaseHistoryId,
-                        principalTable: "DiseaseHistories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Treatments_DiseaseHistories_DiseaseHistoryId1",
-                        column: x => x.DiseaseHistoryId1,
                         principalTable: "DiseaseHistories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -320,14 +338,14 @@ namespace DataLayer.Migrations
                 column: "PatientInfoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Treatments_DiseaseHistoryId",
-                table: "Treatments",
+                name: "IX_Metrics_DiseaseHistoryId",
+                table: "Metrics",
                 column: "DiseaseHistoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Treatments_DiseaseHistoryId1",
+                name: "IX_Treatments_DiseaseHistoryId",
                 table: "Treatments",
-                column: "DiseaseHistoryId1");
+                column: "DiseaseHistoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Treatments_MedicineId",
@@ -358,6 +376,9 @@ namespace DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Metrics");
 
             migrationBuilder.DropTable(
                 name: "Treatments");

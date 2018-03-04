@@ -5,7 +5,6 @@ using Common.Entities.Identity;
 using DataLayer.DbContext;
 using DataLayer.Repositories.Abstractions;
 using DataLayer.Repositories.Implementations;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,13 +27,22 @@ namespace SmartInfusion.API.Infrastructure
                 conf.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>();
 
+
             // Data Layer
             services.AddTransient<IUserInfoRepository, UserInfoRepository>();
+            services.AddTransient<IDiseaseHistoryRepository, DiseaseHistoryRepository>();
+            services.AddTransient<IMedicineRepository, MedicineRepository>();
+            services.AddTransient<IMetricsRepository, MetricsRepository>();
+            services.AddTransient<ITreatmentRepository, TreatmentRepository>();
 
 
             // Business Layer
             services.AddTransient<IUserInfoService, UserInfoService>();
-            
+            services.AddTransient<IDiseaseHistoryService, DiseaseHistoryService>();
+            services.AddTransient<IMedicineService, MedicineService>();
+            services.AddTransient<IMetricsService, MetricsService>();
+            services.AddTransient<ITreatmentService, TreatmentService>();
+
         }
     }
 }

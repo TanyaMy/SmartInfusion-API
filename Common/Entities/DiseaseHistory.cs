@@ -11,6 +11,8 @@ namespace Common.Entities
 
         public UserInfo PatientInfo { get; set; }
 
+        public List<Metrics> Metrics { get; set; }
+
         public List<Treatment> Treatments { get; set; }
     }
 }

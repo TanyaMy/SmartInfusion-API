@@ -19,6 +19,8 @@ namespace DataLayer.DbContext
 
         public DbSet<DiseaseHistory> DiseaseHistories { get; set; }
 
+        public DbSet<Metrics> Metrics { get; set; }
+
         public DbSet<Treatment> Treatments { get; set; }
 
         public DbSet<Medicine> Medicines { get; set; }
@@ -33,7 +35,6 @@ namespace DataLayer.DbContext
             base.OnModelCreating(modelBuilder);
 
             RemoveCascadeDeletingGlobally(modelBuilder);
-
 
             modelBuilder.Entity<AppUser>()
                 .HasOne(p => p.UserInfo)
@@ -51,6 +52,8 @@ namespace DataLayer.DbContext
               .HasForeignKey(ot => ot.MedicineId);
 
             modelBuilder.Entity<Medicine>();
+
+            modelBuilder.Entity<Metrics>();
         }
 
         private void RemoveCascadeDeletingGlobally(ModelBuilder modelBuilder)

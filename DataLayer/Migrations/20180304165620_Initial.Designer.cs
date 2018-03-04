@@ -11,7 +11,7 @@ using System;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180215213914_Initial")]
+    [Migration("20180304165620_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,6 +124,32 @@ namespace DataLayer.Migrations
                     b.ToTable("Medicines");
                 });
 
+            modelBuilder.Entity("Common.Entities.Metrics", b =>
+                {
+                    b.Property<int>("MetricsId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<int>("DiseaseHistoryId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("Updated");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("MetricsId");
+
+                    b.HasIndex("DiseaseHistoryId");
+
+                    b.ToTable("Metrics");
+                });
+
             modelBuilder.Entity("Common.Entities.Treatment", b =>
                 {
                     b.Property<int>("TreatmentId")
@@ -136,8 +162,6 @@ namespace DataLayer.Migrations
                     b.Property<string>("Diagnosis");
 
                     b.Property<int>("DiseaseHistoryId");
-
-                    b.Property<int?>("DiseaseHistoryId1");
 
                     b.Property<double>("Dosage");
 
@@ -154,8 +178,6 @@ namespace DataLayer.Migrations
                     b.HasKey("TreatmentId");
 
                     b.HasIndex("DiseaseHistoryId");
-
-                    b.HasIndex("DiseaseHistoryId1");
 
                     b.HasIndex("MedicineId");
 
@@ -326,16 +348,20 @@ namespace DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Common.Entities.Metrics", b =>
+                {
+                    b.HasOne("Common.Entities.DiseaseHistory", "DiseaseHistory")
+                        .WithMany("Metrics")
+                        .HasForeignKey("DiseaseHistoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Common.Entities.Treatment", b =>
                 {
                     b.HasOne("Common.Entities.DiseaseHistory", "DiseaseHistory")
-                        .WithMany()
+                        .WithMany("Treatments")
                         .HasForeignKey("DiseaseHistoryId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Common.Entities.DiseaseHistory")
-                        .WithMany("Treatments")
-                        .HasForeignKey("DiseaseHistoryId1");
 
                     b.HasOne("Common.Entities.Medicine", "Medicine")
                         .WithMany()
