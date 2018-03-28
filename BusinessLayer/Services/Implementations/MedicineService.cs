@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Services.Abstractions;
 using Common.Entities;
 using DataLayer.Repositories.Abstractions;
+using System.Collections.Generic;
 
 namespace BusinessLayer.Services.Implementations
 {
@@ -13,6 +14,11 @@ namespace BusinessLayer.Services.Implementations
             _medicineRepository = medicineRepository;
         }
 
+        public IList<Medicine> GetAllMedicines()
+        {
+            return _medicineRepository.GetAll();
+        }
+
         public Medicine GetMedicineById(int id)
         {
             return _medicineRepository.GetSingleByPredicate(x => x.MedicineId == id);
@@ -23,9 +29,9 @@ namespace BusinessLayer.Services.Implementations
             return _medicineRepository.GetSingleByPredicate(x => x.Title == title);
         }
 
-        public void Update(Medicine medicine)
+        public Medicine Update(Medicine medicine)
         {
-            _medicineRepository.Update(medicine);
+            return _medicineRepository.Update(medicine);
         }
 
         public Medicine AddMedicine(Medicine medicine)

@@ -15,6 +15,11 @@ namespace BusinessLayer.Services.Implementations
             _metricsRepository = metricsRepository;
         }
 
+        public IList<Metrics> GetAllMetrics()
+        {
+            return _metricsRepository.GetAll();
+        }
+
         public Metrics GetMetricsById(int id)
         {
             return _metricsRepository.GetSingleByPredicate(x => x.MetricsId == id,
@@ -27,9 +32,9 @@ namespace BusinessLayer.Services.Implementations
                     include: x => x.Include(t => t.DiseaseHistory));
         }
 
-        public void Update(Metrics metrics)
+        public Metrics Update(Metrics metrics)
         {
-            _metricsRepository.Update(metrics);
+            return _metricsRepository.Update(metrics);
         }
 
         public Metrics AddMetrics(Metrics metrics)
