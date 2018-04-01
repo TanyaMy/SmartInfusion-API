@@ -21,7 +21,7 @@ namespace BusinessLayer.Services.Implementations
 
         public Medicine GetMedicineById(int id)
         {
-            return _medicineRepository.GetSingleByPredicate(x => x.MedicineId == id);
+            return _medicineRepository.GetSingleByPredicate(x => x.Id == id);
         }
 
         public Medicine GetMedicineByTitle(string title)

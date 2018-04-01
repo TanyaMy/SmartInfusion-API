@@ -17,7 +17,7 @@ namespace BusinessLayer.Services.Implementations
 
         public Treatment GetTreatmentById(int id)
         {
-            return _treatmentRepository.GetSingleByPredicate(x => x.TreatmentId == id,
+            return _treatmentRepository.GetSingleByPredicate(x => x.Id == id,
                 include: x => x.Include(t => t.Medicine)
                                 .Include(t => t.DiseaseHistory));
         }

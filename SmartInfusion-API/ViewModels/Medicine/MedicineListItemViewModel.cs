@@ -7,12 +7,12 @@ namespace SmartInfusion.API.ViewModels
     {
         public MedicineListItemViewModel(Medicine medicine)
         {
-            MedicineId = medicine.MedicineId;
+            Id = medicine.Id;
             Title = medicine.Title;
             Description = medicine.Description;
         }
 
-        public Int32 MedicineId { get; set; }
+        public Int32 Id { get; set; }
 
         public String Title { get; set; }
 

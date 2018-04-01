@@ -54,7 +54,7 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTreatment(TreatmentListItemViewModel model)
+        public IActionResult AddTreatment(EditTreatmentViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult EditTreatment(TreatmentListItemViewModel model)
+        public IActionResult EditTreatment(EditTreatmentViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace SmartInfusion.API.Controllers
             {
                 var treatment = new Treatment
                 {
-                    TreatmentId = model.TreatmentId,
+                    Id = model.Id,
                     MedicineId = model.MedicineId,
                     Diagnosis = model.Diagnosis,
                     MedicineWeight = model.MedicineWeight,

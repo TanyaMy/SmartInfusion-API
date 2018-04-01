@@ -55,7 +55,7 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMedicine(MetricListItemViewModel model)
+        public IActionResult AddMedicine(EditMetricViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult EditMetrics(MetricListItemViewModel model)
+        public IActionResult EditMetrics(EditMetricViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace SmartInfusion.API.Controllers
             {
                 var metrics = new Metrics
                 {
-                    MetricsId = model.MetricsId,
+                    Id = model.Id,
                     Name = model.Name,
                     Value = model.Value,
                     DiseaseHistoryId = model.DiseaseHistoryId

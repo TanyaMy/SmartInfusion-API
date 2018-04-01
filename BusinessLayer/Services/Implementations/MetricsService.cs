@@ -22,7 +22,7 @@ namespace BusinessLayer.Services.Implementations
 
         public Metrics GetMetricsById(int id)
         {
-            return _metricsRepository.GetSingleByPredicate(x => x.MetricsId == id,
+            return _metricsRepository.GetSingleByPredicate(x => x.Id == id,
                     include: x => x.Include(t => t.DiseaseHistory));
         }
 

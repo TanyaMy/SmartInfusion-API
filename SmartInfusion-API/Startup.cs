@@ -54,8 +54,8 @@ namespace SmartInfusion.API
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-            string origins = "https://TanyaMy.github.io";
+
+            string origins = "http://localhost:4200";
             app.UseCors(builder => builder
                 .WithOrigins(origins)
                 .AllowAnyMethod()
@@ -64,7 +64,7 @@ namespace SmartInfusion.API
 
             app.UseStaticFiles();
             app.UseAuthentication();
-            
+
             app.Use(async (context, next) =>
             {
                 CurrentUserHolder.CurrentUser = context?.User?.Identity?.Name;

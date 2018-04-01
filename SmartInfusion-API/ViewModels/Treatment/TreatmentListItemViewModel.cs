@@ -4,7 +4,7 @@ namespace SmartInfusion.API.ViewModels
 {
     public class TreatmentListItemViewModel
     {
-        public int TreatmentId { get; set; }
+        public int Id { get; set; }
 
         public int MedicineId { get; set; }
 
@@ -20,7 +20,7 @@ namespace SmartInfusion.API.ViewModels
 
         public TreatmentListItemViewModel(Treatment treatment)
         {
-            TreatmentId = treatment.TreatmentId;
+            Id = treatment.Id;
             MedicineId = treatment.MedicineId;
             Diagnosis = treatment.Diagnosis;
             MedicineWeight = treatment.MedicineWeight;

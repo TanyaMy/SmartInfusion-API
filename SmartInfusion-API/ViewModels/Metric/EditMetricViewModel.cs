@@ -1,8 +1,6 @@
-﻿using Common.Entities.Base;
-
-namespace Common.Entities
+﻿namespace SmartInfusion.API.ViewModels
 {
-    public class Metrics : BaseEntity
+    public class EditMetricViewModel
     {
         public int Id { get; set; }
 
@@ -11,7 +9,5 @@ namespace Common.Entities
         public string Value { get; set; }
 
         public int DiseaseHistoryId { get; set; }
-
-        public DiseaseHistory DiseaseHistory { get; set; }
     }
 }

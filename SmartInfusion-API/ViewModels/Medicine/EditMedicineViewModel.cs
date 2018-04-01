@@ -1,9 +1,8 @@
-﻿using Common.Entities.Base;
-using System;
+﻿using System;
 
-namespace Common.Entities
+namespace SmartInfusion.API.ViewModels
 {
-    public class Medicine : BaseEntity
+    public class EditMedicineViewModel
     {
         public Int32 Id { get; set; }
 

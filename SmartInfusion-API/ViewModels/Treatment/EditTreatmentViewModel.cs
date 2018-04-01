@@ -1,14 +1,10 @@
-﻿using Common.Entities.Base;
-
-namespace Common.Entities
+﻿namespace SmartInfusion.API.ViewModels
 {
-    public class Treatment : BaseEntity
+    public class EditTreatmentViewModel
     {
         public int Id { get; set; }
 
         public int MedicineId { get; set; }
-
-        public Medicine Medicine { get; set; }
 
         public string Diagnosis { get; set; }
 
@@ -19,7 +15,5 @@ namespace Common.Entities
         public double Dosage { get; set; }
 
         public int DiseaseHistoryId { get; set; }
-
-        public DiseaseHistory DiseaseHistory { get; set; }
     }
 }

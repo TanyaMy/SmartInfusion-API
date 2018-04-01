@@ -6,13 +6,13 @@ namespace SmartInfusion.API.ViewModels
     {
         public MetricListItemViewModel(Metrics metric)
         {
-            MetricsId = metric.MetricsId;
+            Id = metric.Id;
             Name = metric.Name;
             Value = metric.Value;
             DiseaseHistoryId = metric.DiseaseHistoryId;
         }
 
-        public int MetricsId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
