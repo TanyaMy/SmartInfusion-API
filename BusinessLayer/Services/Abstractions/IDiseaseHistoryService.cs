@@ -13,6 +13,8 @@ namespace BusinessLayer.Services.Abstractions
 
         DiseaseHistory AddDiseaseHistory(DiseaseHistory history);
 
+        IList<DiseaseHistory> GetDiseaseHistoriesByUsername(string userName);
+
         void Update(DiseaseHistory history);
     }
 }

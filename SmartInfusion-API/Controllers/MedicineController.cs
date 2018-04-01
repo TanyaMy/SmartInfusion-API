@@ -1,5 +1,4 @@
 ﻿using BusinessLayer.Services.Abstractions;
-using Common.Constants;
 using Common.Entities;
 using Common.Entities.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartInfusion.API.ViewModels;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SmartInfusion.API.Controllers
 {
