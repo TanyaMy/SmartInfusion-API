@@ -9,6 +9,8 @@ namespace Common.Entities
 
         public int PatientInfoId { get; set; }
 
+        public string Message { get; set; }
+
         public UserInfo PatientInfo { get; set; }
 
         public List<Metrics> Metrics { get; set; }

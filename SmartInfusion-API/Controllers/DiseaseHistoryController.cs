@@ -82,7 +82,8 @@ namespace SmartInfusion.API.Controllers
                 var diseaseHistory = new DiseaseHistory()
                 {
                     PatientInfoId = patientUserInfo.UserInfoId,
-                    PatientInfo = patientUserInfo
+                    PatientInfo = patientUserInfo,
+                    Message = model.Message
                 };
 
 
