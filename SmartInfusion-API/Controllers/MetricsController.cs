@@ -54,8 +54,24 @@ namespace SmartInfusion.API.Controllers
             return Json(result);
         }
 
+        [HttpGet]
+        public IActionResult GetMetricsFromDiseaseHistory(int id)
+        {
+            var result = ContentExecute<MetricListViewModel>(() =>
+            {
+                var metrics = _metricsService.GetMetricsByDiseaseHistoryId(id);
+                var metricListItems = metrics.Select(x => new MetricListItemViewModel(x));
+                return new MetricListViewModel()
+                {
+                    Metrics = metricListItems.ToList()
+                };
+            });
+
+            return Json(result);
+        }
+
         [HttpPost]
-        public IActionResult AddMedicine(EditMetricViewModel model)
+        public IActionResult AddMetrics(EditMetricViewModel model)
         {
             if (!ModelState.IsValid)
             {

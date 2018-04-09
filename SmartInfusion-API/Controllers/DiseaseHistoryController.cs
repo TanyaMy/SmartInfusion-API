@@ -63,6 +63,19 @@ namespace SmartInfusion.API.Controllers
             return Json(response);
         }
 
+        [HttpGet]
+        public IActionResult GetDiseaseHistoryDetails(int id)
+        {
+            var response = ContentExecute(() =>
+            {
+                var username = User.Identity.Name;
+                var history = _diseaseHistoryService.GetDiseaseHistoryById(id);
+                
+                return new DiseaseHistoryDetailsViewModel(history);
+            });
+
+            return Json(response);
+        }
 
         [HttpPost]
         public IActionResult CreateDiseaseHistory(PatientViewModel model)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SmartInfusion.API.ViewModels.UserInfo
+namespace SmartInfusion.API.ViewModels
 {
     public class UserInfoDetailedViewModel
     {
