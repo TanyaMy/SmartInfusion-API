@@ -20,6 +20,8 @@ namespace Common.Entities
 
         public int DiseaseHistoryId { get; set; }
 
+        public bool IsCompleted { get; set; }
+
         public DiseaseHistory DiseaseHistory { get; set; }
     }
 }

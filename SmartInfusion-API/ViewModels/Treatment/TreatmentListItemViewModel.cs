@@ -1,4 +1,5 @@
 ﻿using Common.Entities;
+using System;
 
 namespace SmartInfusion.API.ViewModels
 {
@@ -18,6 +19,10 @@ namespace SmartInfusion.API.ViewModels
 
         public int DiseaseHistoryId { get; set; }
 
+        public bool IsCompleted { get; set; }
+
+        public DateTime Created { get; set; }
+
         public TreatmentListItemViewModel(Treatment treatment)
         {
             Id = treatment.Id;
@@ -27,6 +32,8 @@ namespace SmartInfusion.API.ViewModels
             SolutionVolume = treatment.SolutionVolume;
             Dosage = treatment.Dosage;
             DiseaseHistoryId = treatment.DiseaseHistoryId;
+            IsCompleted = treatment.IsCompleted;
+            Created = treatment.Created;
         }
     }
 }

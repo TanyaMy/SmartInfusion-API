@@ -1,11 +1,13 @@
 ﻿using BusinessLayer.Services.Abstractions;
 using Common.Entities;
 using Common.Entities.Identity;
+using Common.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartInfusion.API.ViewModels;
+using System;
 using System.Linq;
 
 namespace SmartInfusion.API.Controllers
@@ -26,11 +28,11 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTreatments(int diseaseHistoryId)
+        public IActionResult GetTreatments(int id)
         {
             var result = ContentExecute<TreatmentListViewModel>(() =>
             {
-                var treatments = _treatmentService.GetTreatmentsByDiseaseHistoryId(diseaseHistoryId);
+                var treatments = _treatmentService.GetTreatmentsByDiseaseHistoryId(id);
                 var medicineListItems = treatments.Select(x => new TreatmentListItemViewModel(x));
                 return new TreatmentListViewModel()
                 {
@@ -44,10 +46,10 @@ namespace SmartInfusion.API.Controllers
         [HttpGet]
         public IActionResult GetTreatmentById(int id)
         {
-            var result = ContentExecute<Treatment>(() =>
+            var result = ContentExecute<TreatmentListItemViewModel>(() =>
             {
                 var treatment = _treatmentService.GetTreatmentById(id);
-                return treatment;
+                return new TreatmentListItemViewModel(treatment);
             });
 
             return Json(result);
@@ -86,7 +88,7 @@ namespace SmartInfusion.API.Controllers
             {
             }
 
-            var result = ContentExecute<TreatmentListItemViewModel>(() =>
+            var result = Execute(() =>
             {
                 var treatment = new Treatment
                 {
@@ -98,8 +100,25 @@ namespace SmartInfusion.API.Controllers
                     Dosage = model.Dosage,
                     DiseaseHistoryId = model.DiseaseHistoryId
                 };
-                var newTreatment = _treatmentService.AddTreatment(treatment);
-                return new TreatmentListItemViewModel(newTreatment);
+                _treatmentService.Update(treatment);
+            });
+
+            return Json(result);
+        }
+        
+        public IActionResult CompleteTreatment(int id)
+        {
+            var result = Execute(() =>
+            {
+                bool isMedEmployee = _userManager.IsUserInMedEmployeeRole(User.Identity.Name);
+
+                if (!isMedEmployee)
+                {
+                    throw new UnauthorizedAccessException("You have not appropriate rights to access this action");
+                }
+
+                _treatmentService.CompleteTreatment(id);
+
             });
 
             return Json(result);

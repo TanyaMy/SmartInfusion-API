@@ -1,4 +1,6 @@
-﻿namespace SmartInfusion.API.ViewModels
+﻿using System;
+
+namespace SmartInfusion.API.ViewModels
 {
     public class EditTreatmentViewModel
     {
@@ -15,5 +17,9 @@
         public double Dosage { get; set; }
 
         public int DiseaseHistoryId { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public bool IsCompleted { get; set; }
     }
 }

@@ -43,12 +43,18 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetMetricById(int id)
+        public IActionResult GetMetricsById(int id)
         {
-            var result = ContentExecute<Metrics>(() =>
+            var result = ContentExecute<EditMetricViewModel>(() =>
             {
                 var metrics = _metricsService.GetMetricsById(id);
-                return metrics;
+                return new EditMetricViewModel
+                {
+                    Id = metrics.Id,
+                    Name = metrics.Name,
+                    Value = metrics.Value,
+                    DiseaseHistoryId = metrics.DiseaseHistoryId
+                };
             });
 
             return Json(result);

@@ -6,6 +6,8 @@
         
         public const string Patient = "Patient";
 
-        public const string MedicalEmployee = "MedicalEmployee";
+        public const string Doctor = "Doctor";
+
+        public const string Nurse = "Nurse";
     }
 }

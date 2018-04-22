@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BusinessLayer.Services.Abstractions;
 using Common.Entities;
 using DataLayer.Repositories.Abstractions;
@@ -29,7 +30,9 @@ namespace BusinessLayer.Services.Implementations
         public IList<Metrics> GetMetricsByDiseaseHistoryId(int historyId)
         {
             return _metricsRepository.GetAll(x => x.DiseaseHistoryId == historyId,
-                    include: x => x.Include(t => t.DiseaseHistory));
+                    include: x => x.Include(t => t.DiseaseHistory))
+                    .OrderByDescending(m => m.Created)
+                    .ToList();
         }
 
         public Metrics Update(Metrics metrics)

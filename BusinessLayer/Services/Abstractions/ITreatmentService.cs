@@ -12,5 +12,7 @@ namespace BusinessLayer.Services.Abstractions
         Treatment AddTreatment(Treatment treatment);
 
         void Update(Treatment treatment);
+
+        void CompleteTreatment(int id);
     }
 }

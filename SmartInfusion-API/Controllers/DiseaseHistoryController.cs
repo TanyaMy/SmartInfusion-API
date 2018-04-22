@@ -51,7 +51,7 @@ namespace SmartInfusion.API.Controllers
             {
                 var username = User.Identity.Name;
                 var user = _userManager.FindByNameAsync(username).Result;
-                var isMedEmployee = _userManager.IsInRoleAsync(user, RolesConstants.MedicalEmployee).Result;
+                var isMedEmployee = _userManager.IsUserInMedEmployeeRole(username);
                 var histories = isMedEmployee
                     ? _diseaseHistoryService.GetAll()
                     : _diseaseHistoryService.GetDiseaseHistoriesByUsername(user.UserName);

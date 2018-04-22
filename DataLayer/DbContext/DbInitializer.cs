@@ -48,7 +48,6 @@ namespace DataLayer.DbContext
         public async Task InitializeAsync()
         {
             await FillRolesAsync();
-            await FillRolesClaimsAsync();
             await FillUsersAsync();
         }
 
@@ -59,72 +58,8 @@ namespace DataLayer.DbContext
                 // TODO: add claims to roles
                 await _roleManager.CreateAsync(new IdentityRole(RolesConstants.Administrator));
                 await _roleManager.CreateAsync(new IdentityRole(RolesConstants.Patient));
-                await _roleManager.CreateAsync(new IdentityRole(RolesConstants.MedicalEmployee));
-            }
-        }
-
-        private async Task FillRolesClaimsAsync()
-        {
-            if (!_dbContext.RoleClaims.Any())
-            {
-                var viewDonorRequestList = new Claim("View Donor Request List", ((int)AppClaimTypes.ViewDonorRequestList).ToString());
-                var viewDonorRequest = new Claim("View Donor Request", ((int)AppClaimTypes.ViewDonorRequest).ToString());
-                var editDonorRequest = new Claim("Edit Donor Request", ((int)AppClaimTypes.EditDonorRequest).ToString());
-                var changeDonorRequestStatus = new Claim("Change Donor Request Status", ((int)AppClaimTypes.ChangeDonorRequestStatus).ToString());
-
-                var viewOrganRequestList = new Claim("View Organ Request List", ((int)AppClaimTypes.ViewOrganRequestList).ToString());
-                var viewOrganRequest = new Claim("View Organ Request", ((int)AppClaimTypes.ViewOrganRequest).ToString());
-                var editOrganRequest = new Claim("Edit Organ Request", ((int)AppClaimTypes.EditOrganRequest).ToString());
-                var createOrganRequest = new Claim("Create Organ Request", ((int)AppClaimTypes.CreateOrganRequest).ToString());
-
-                var connectDonorAndOrganRequests = new Claim("Connect Donor And Organ Requests", ((int)AppClaimTypes.ConnectDonorAndOrganRequests).ToString());
-
-                var addNewOrgan = new Claim("Add New Organ", ((int)AppClaimTypes.AddNewOrgan).ToString());
-                var addNewMedicalEmployee = new Claim("Add New Medical Employee", ((int)AppClaimTypes.AddNewMedicalEmployee).ToString());
-
-                var addOrganInfo = new Claim("Add Organ Info", ((int)AppClaimTypes.AddOrganInfo).ToString());
-                var registerNewPatient = new Claim("Register New Patient", ((int)AppClaimTypes.RegisterNewPatient).ToString());
-                var addClinic = new Claim("Add Clinic", ((int)AppClaimTypes.AddClinic).ToString());
-
-                var viewOrganTransportData = new Claim("View Organ Transport Data", ((int)AppClaimTypes.ViewOrganTransportData).ToString());
-
-                var adminRole = await _roleManager.FindByNameAsync(RolesConstants.Administrator);
-                await _roleManager.AddClaimAsync(adminRole, viewDonorRequestList);
-                await _roleManager.AddClaimAsync(adminRole, viewDonorRequest);
-                await _roleManager.AddClaimAsync(adminRole, editDonorRequest);
-                await _roleManager.AddClaimAsync(adminRole, changeDonorRequestStatus);
-                await _roleManager.AddClaimAsync(adminRole, viewOrganRequestList);
-                await _roleManager.AddClaimAsync(adminRole, viewOrganRequest);
-                await _roleManager.AddClaimAsync(adminRole, editOrganRequest);
-                await _roleManager.AddClaimAsync(adminRole, createOrganRequest);
-                await _roleManager.AddClaimAsync(adminRole, connectDonorAndOrganRequests);
-                await _roleManager.AddClaimAsync(adminRole, addNewOrgan);
-                await _roleManager.AddClaimAsync(adminRole, addNewMedicalEmployee);
-                await _roleManager.AddClaimAsync(adminRole, addOrganInfo);
-                await _roleManager.AddClaimAsync(adminRole, registerNewPatient);
-                await _roleManager.AddClaimAsync(adminRole, addClinic);
-
-
-                var patientRole = await _roleManager.FindByNameAsync(RolesConstants.Patient);
-                await _roleManager.AddClaimAsync(patientRole, viewOrganRequest);
-                await _roleManager.AddClaimAsync(patientRole, viewOrganTransportData);
-
-                var medEmployeeRole = await _roleManager.FindByNameAsync(RolesConstants.MedicalEmployee);
-                await _roleManager.AddClaimAsync(medEmployeeRole, viewDonorRequestList);
-                await _roleManager.AddClaimAsync(medEmployeeRole, viewDonorRequest);
-                await _roleManager.AddClaimAsync(medEmployeeRole, editDonorRequest);
-                await _roleManager.AddClaimAsync(medEmployeeRole, changeDonorRequestStatus);
-
-                await _roleManager.AddClaimAsync(medEmployeeRole, viewOrganRequestList);
-                await _roleManager.AddClaimAsync(medEmployeeRole, viewOrganRequest);
-                await _roleManager.AddClaimAsync(medEmployeeRole, editDonorRequest);
-                await _roleManager.AddClaimAsync(medEmployeeRole, createOrganRequest);
-
-                await _roleManager.AddClaimAsync(medEmployeeRole, connectDonorAndOrganRequests);
-
-                await _roleManager.AddClaimAsync(medEmployeeRole, addNewOrgan);
-                await _roleManager.AddClaimAsync(medEmployeeRole, registerNewPatient);
-                await _roleManager.AddClaimAsync(medEmployeeRole, viewOrganTransportData);
+                await _roleManager.CreateAsync(new IdentityRole(RolesConstants.Doctor));
+                await _roleManager.CreateAsync(new IdentityRole(RolesConstants.Nurse));
             }
         }
 
@@ -143,7 +78,8 @@ namespace DataLayer.DbContext
 
             string adminEmail = "admin1@test.com";
             string patientEmail = "patient1@test.com";
-            string medEmployeeEmail = "medEmployee1@test.com";
+            string doctorEmail = "doctor1@test.com";
+            string nurseEmail = "nurse1@test.com";
 
             UserInfo adminUserInfo = new UserInfo
             {
@@ -173,9 +109,9 @@ namespace DataLayer.DbContext
             res = await _userManager.CreateAsync(new AppUser { UserName = patientEmail, Email = patientEmail, EmailConfirmed = true, UserInfo = patientUserInfo }, password);
             res = await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(patientEmail), RolesConstants.Patient);
 
-            UserInfo medEmployeeUserInfo = new UserInfo
+            UserInfo doctorUserInfo = new UserInfo
             {
-                Email = medEmployeeEmail,
+                Email = doctorEmail,
                 ZipCode = "60000",
                 Country = "Ukraine",
                 City = "Kharkiv",
@@ -189,8 +125,27 @@ namespace DataLayer.DbContext
                 Created = created,
                 CreatedBy = createdBy
             };
-            res = await _userManager.CreateAsync(new AppUser { UserName = medEmployeeEmail, Email = medEmployeeEmail, EmailConfirmed = true, UserInfo = medEmployeeUserInfo }, password);
-            res = await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(medEmployeeEmail), RolesConstants.MedicalEmployee);
+            res = await _userManager.CreateAsync(new AppUser { UserName = doctorEmail, Email = doctorEmail, EmailConfirmed = true, UserInfo = doctorUserInfo }, password);
+            res = await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(doctorEmail), RolesConstants.Doctor);
+
+            UserInfo nurseUserInfo = new UserInfo
+            {
+                Email = nurseEmail,
+                ZipCode = "123456",
+                Country = "Ukraine",
+                City = "Dnipro",
+                FirstName = "Test First",
+                SecondName = "Second name 1 3",
+                BirthDate = DateTime.UtcNow.AddYears(-40),
+                Notes = "Test Info 123",
+                AddressLine1 = "Test address line 1 3",
+                AddressLine2 = "Test address line 2 3",
+                PhoneNumber = "+380994255628",
+                Created = created,
+                CreatedBy = createdBy
+            };
+            res = await _userManager.CreateAsync(new AppUser { UserName = nurseEmail, Email = nurseEmail, EmailConfirmed = true, UserInfo = nurseUserInfo }, password);
+            res = await _userManager.AddToRoleAsync(await _userManager.FindByNameAsync(nurseEmail), RolesConstants.Nurse);
         }
 
         public void Dispose()

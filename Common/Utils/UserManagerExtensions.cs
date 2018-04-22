@@ -9,7 +9,8 @@ namespace Common.Utils
         public static bool IsUserInMedEmployeeRole(this UserManager<AppUser> userManager, string username)
         {
             var user = userManager.FindByNameAsync(username).Result;
-            var isMedEmployee = userManager.IsInRoleAsync(user, RolesConstants.MedicalEmployee).Result;
+            var isMedEmployee = userManager.IsInRoleAsync(user, RolesConstants.Doctor).Result
+                || userManager.IsInRoleAsync(user, RolesConstants.Nurse).Result;
             return isMedEmployee;
         }
 

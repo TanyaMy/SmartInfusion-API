@@ -39,5 +39,12 @@ namespace BusinessLayer.Services.Implementations
         {
             _treatmentRepository.Update(treatment);
         }
+
+        public void CompleteTreatment(int id)
+        {
+            var treatment = _treatmentRepository.GetSingleByPredicate(x => x.Id == id);
+            treatment.IsCompleted = true;
+            _treatmentRepository.Update(treatment);
+        }
     }
 }

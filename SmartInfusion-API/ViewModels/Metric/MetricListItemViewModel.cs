@@ -1,4 +1,5 @@
 ﻿using Common.Entities;
+using System;
 
 namespace SmartInfusion.API.ViewModels
 {
@@ -10,6 +11,7 @@ namespace SmartInfusion.API.ViewModels
             Name = metric.Name;
             Value = metric.Value;
             DiseaseHistoryId = metric.DiseaseHistoryId;
+            Created = metric.Created;
         }
 
         public int Id { get; set; }
@@ -19,5 +21,7 @@ namespace SmartInfusion.API.ViewModels
         public string Value { get; set; }
 
         public int DiseaseHistoryId { get; set; }
+
+        public DateTime Created { get; set; }
     }
 }
