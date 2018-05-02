@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartInfusion.API.ViewModels;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SmartInfusion.API.Controllers
 {

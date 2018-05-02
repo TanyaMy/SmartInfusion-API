@@ -9,6 +9,7 @@ using System;
 using System.Text;
 using Common.Constants;
 using Common.Utils;
+using System.Globalization;
 
 namespace SmartInfusion.API
 {
@@ -72,6 +73,12 @@ namespace SmartInfusion.API
             });
 
             app.UseMvc();
+
+            System.Globalization.CultureInfo customCulture = new CultureInfo("en-US");
+            customCulture.NumberFormat.NumberDecimalSeparator = ".";
+
+            CultureInfo.DefaultThreadCurrentCulture = customCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = customCulture;
         }
     }
 }
