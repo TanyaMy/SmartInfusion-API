@@ -24,9 +24,9 @@ namespace BusinessLayer.Services.Implementations
         public DiseaseHistory GetDiseaseHistoryById(int id)
         {
             return _diseaseHistoryRepository.GetSingleByPredicate(x => x.Id == id,
-                include: x => x.Include(h => h.Treatments)
-                                .Include(h => h.Metrics)
-                                .Include(h => h.PatientInfo));
+                include: x => x.Include(h => h.Metrics)
+                                .Include(h => h.PatientInfo)
+                                .Include(h => h.Treatments).ThenInclude(t => t.Medicine));
         }
 
         public DiseaseHistory GetDiseaseHistoryByPatientId(int id)
