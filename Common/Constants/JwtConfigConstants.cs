@@ -7,6 +7,6 @@ namespace Common.Constants
     public static class JwtConfigConstants
     {
         // Address of current API
-        public const string Issuer = "https://trackyourlife-api.azurewebsites.net";
+        public const string Issuer = "https://smartinfusion-api.azurewebsites.net";
     }
 }

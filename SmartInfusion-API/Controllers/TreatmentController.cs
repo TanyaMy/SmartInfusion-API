@@ -44,6 +44,23 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetNotCompletedTreatments(int id)
+        {
+            var result = ContentExecute<TreatmentListViewModel>(() =>
+            {
+                var treatments = _treatmentService.GetTreatmentsByDiseaseHistoryId(id).Where(t => !t.IsCompleted);
+                var medicineListItems = treatments.Select(x => new TreatmentListItemViewModel(x));
+                return new TreatmentListViewModel()
+                {
+                    Treatments = medicineListItems.ToList()
+                };
+            });
+
+            return Json(result);
+        }
+
+        [HttpGet]
         public IActionResult GetTreatmentById(int id)
         {
             var result = ContentExecute<TreatmentListItemViewModel>(() =>

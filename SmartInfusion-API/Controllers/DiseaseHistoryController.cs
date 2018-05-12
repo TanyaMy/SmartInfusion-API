@@ -64,13 +64,28 @@ namespace SmartInfusion.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetDiseaseHistoriesAnonymus()
+        {
+            var response = ContentExecute(() =>
+            {
+                var histories = _diseaseHistoryService.GetAll();
+
+                var historiesListItems = histories.Select(h => new DiseaseHistoryListItemViewModel(h)).ToList();
+                return new DiseaseHistoryListViewModel(historiesListItems);
+            });
+
+            return Json(response);
+        }
+
+        [HttpGet]
         public IActionResult GetDiseaseHistoryDetails(int id)
         {
             var response = ContentExecute(() =>
             {
                 var username = User.Identity.Name;
                 var history = _diseaseHistoryService.GetDiseaseHistoryById(id);
-                
+
                 return new DiseaseHistoryDetailsViewModel(history);
             });
 
