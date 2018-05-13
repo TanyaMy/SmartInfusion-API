@@ -19,9 +19,13 @@ namespace SmartInfusion.API.ViewModels
 
         public double Dosage { get; set; }
 
+        public double InfusionSpeed { get; set; }
+
         public int DiseaseHistoryId { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public double PatientWeight { get; set; }
 
         public DateTime Created { get; set; }
 
@@ -34,8 +38,10 @@ namespace SmartInfusion.API.ViewModels
             MedicineWeight = treatment.MedicineWeight;
             SolutionVolume = treatment.SolutionVolume;
             Dosage = treatment.Dosage;
+            InfusionSpeed = treatment.InfusionSpeed;
             DiseaseHistoryId = treatment.DiseaseHistoryId;
             IsCompleted = treatment.IsCompleted;
+            PatientWeight = (treatment.DiseaseHistory?.PatientInfo?.Weight).GetValueOrDefault();
             Created = treatment.Created;
         }
     }

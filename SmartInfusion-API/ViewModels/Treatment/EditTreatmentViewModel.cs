@@ -16,6 +16,8 @@ namespace SmartInfusion.API.ViewModels
 
         public double Dosage { get; set; }
 
+        public double InfusionSpeed { get; set; }
+
         public int DiseaseHistoryId { get; set; }
 
         public DateTime Created { get; set; }

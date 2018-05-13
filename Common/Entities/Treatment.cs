@@ -18,6 +18,8 @@ namespace Common.Entities
 
         public double Dosage { get; set; }
 
+        public double InfusionSpeed { get; set; }
+
         public int DiseaseHistoryId { get; set; }
 
         public bool IsCompleted { get; set; }

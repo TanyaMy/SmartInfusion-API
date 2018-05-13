@@ -26,7 +26,9 @@ namespace BusinessLayer.Services.Implementations
         {
             return _treatmentRepository.GetAll(x => x.DiseaseHistoryId == historyId,
                  include: x => x.Include(t => t.Medicine)
-                                .Include(t => t.DiseaseHistory));
+                                .Include(t => t.DiseaseHistory)
+                                .Include(t => t.DiseaseHistory)
+                                .ThenInclude(dh => dh.PatientInfo));
 
         }
 

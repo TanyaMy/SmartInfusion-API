@@ -89,6 +89,7 @@ namespace SmartInfusion.API.Controllers
                     MedicineWeight = model.MedicineWeight,
                     SolutionVolume = model.SolutionVolume,
                     Dosage = model.Dosage,
+                    InfusionSpeed = model.InfusionSpeed,
                     DiseaseHistoryId = model.DiseaseHistoryId
                 };
                 var newTreatment = _treatmentService.AddTreatment(treatment);
@@ -114,6 +115,7 @@ namespace SmartInfusion.API.Controllers
                     Diagnosis = model.Diagnosis,
                     MedicineWeight = model.MedicineWeight,
                     SolutionVolume = model.SolutionVolume,
+                    InfusionSpeed = model.InfusionSpeed,
                     Dosage = model.Dosage,
                     DiseaseHistoryId = model.DiseaseHistoryId
                 };
