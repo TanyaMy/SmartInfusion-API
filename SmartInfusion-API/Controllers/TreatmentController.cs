@@ -86,7 +86,6 @@ namespace SmartInfusion.API.Controllers
                 {
                     MedicineId = model.MedicineId,
                     Diagnosis = model.Diagnosis,
-                    MedicineWeight = model.MedicineWeight,
                     SolutionVolume = model.SolutionVolume,
                     Dosage = model.Dosage,
                     InfusionSpeed = model.InfusionSpeed,
@@ -113,7 +112,6 @@ namespace SmartInfusion.API.Controllers
                     Id = model.Id,
                     MedicineId = model.MedicineId,
                     Diagnosis = model.Diagnosis,
-                    MedicineWeight = model.MedicineWeight,
                     SolutionVolume = model.SolutionVolume,
                     InfusionSpeed = model.InfusionSpeed,
                     Dosage = model.Dosage,

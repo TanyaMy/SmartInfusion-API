@@ -13,8 +13,6 @@ namespace SmartInfusion.API.ViewModels
 
         public string Diagnosis { get; set; }
 
-        public double MedicineWeight { get; set; }
-
         public double SolutionVolume { get; set; }
 
         public double Dosage { get; set; }
@@ -35,7 +33,6 @@ namespace SmartInfusion.API.ViewModels
             MedicineId = treatment.MedicineId;
             MedicineTitle = treatment.Medicine?.Title;
             Diagnosis = treatment.Diagnosis;
-            MedicineWeight = treatment.MedicineWeight;
             SolutionVolume = treatment.SolutionVolume;
             Dosage = treatment.Dosage;
             InfusionSpeed = treatment.InfusionSpeed;
